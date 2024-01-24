@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,6 +36,8 @@ public class Product {
     private String quality;
 
 
+    @OneToMany(mappedBy="product")
+    private List<Barend> barend;
 
     public  Product(@Valid ProductRequest productRequest) {
         this.prodName = productRequest.getProdName();
