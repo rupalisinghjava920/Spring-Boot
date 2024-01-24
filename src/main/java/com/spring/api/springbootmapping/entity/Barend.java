@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -31,8 +33,11 @@ public class Barend {
     @Column(name = "quality")
     private String quality;
 
-    @ManyToOne
-    @JoinColumn(name="product_id")
+//    @ManyToOne
+//    @JoinColumn(name="product_id")
+//    private Product product;
+
+    @OneToOne(mappedBy = "barend")
     private Product product;
 
 }

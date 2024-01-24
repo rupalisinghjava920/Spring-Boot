@@ -36,8 +36,11 @@ public class Product {
     private String quality;
 
 
-    @OneToMany(mappedBy="product")
-    private List<Barend> barend;
+//    @OneToMany(mappedBy="product")
+//    private List<Barend> barend;
+    @OneToOne
+    @JoinColumn(name="barend_id")
+    private Barend barend;
 
     public  Product(@Valid ProductRequest productRequest) {
         this.prodName = productRequest.getProdName();
