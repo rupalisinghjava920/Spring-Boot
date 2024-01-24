@@ -11,6 +11,6 @@ public class ProductRequest {
 
     private String prodName;
     private String quality;
-    private String barend;
+    private List<String> barend;
 
 }

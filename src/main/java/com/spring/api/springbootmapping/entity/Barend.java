@@ -28,7 +28,10 @@ public class Barend {
 
     @NotBlank(message = "Quality is cannot Blank")
     @NotEmpty(message = "Quality is cannot Empty")
-   // @Column(name = "quality")
+    @Column(name = "quality")
     private String quality;
 
+    @ManyToOne
+    @JoinColumn(name="product_id")
+    private Product product;
 }

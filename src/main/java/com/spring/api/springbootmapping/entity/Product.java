@@ -33,16 +33,11 @@ public class Product {
     @NotBlank(message = "Quality is cannot Blank")
     private String quality;
 
-    @JoinColumn(name="barend_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Barend barend;
+
 
     public  Product(@Valid ProductRequest productRequest) {
         this.prodName = productRequest.getProdName();
         this.quality=productRequest.getQuality();
     }
 
-
-    public void setBarend(Barend bar) {
-    }
 }
