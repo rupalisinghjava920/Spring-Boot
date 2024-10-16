@@ -9,11 +9,12 @@ public interface EmployeeService {
 	
 	Employee saveEmployee(Employee employee);
 	
-	Employee getSingleEmployee(Long id);
-	
-	void deleteEmployee(Long id);
-	
-	Employee updateEmployee(Employee employee);	
+	Employee getSingleEmployee(int id);
+
+
+	void deleteEmployee(int employeeId);
+
+	Employee updateEmployee(Employee employee, int employeeId);
 	
 	List<Employee> getEmployeesByName(String name);
 	

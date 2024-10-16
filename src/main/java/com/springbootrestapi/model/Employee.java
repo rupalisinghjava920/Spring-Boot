@@ -2,6 +2,8 @@ package com.springbootrestapi.model;
 
 
 import java.util.Date;
+
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.Column;
@@ -12,12 +14,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Entity
 @Table(name="TBL_EMPLOYEE")
@@ -26,7 +27,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="employee_id")
-	private Long id;
+	private int id;
 	
 	
 	@Column(name="employee_name")
@@ -34,7 +35,7 @@ public class Employee {
 	private String name;
 	
 	@Column(name="employee_age")
-	private Long age=0L;
+	private int age=0;
 	
 	@Column(name="employee_location")
 	private String location;
@@ -54,5 +55,6 @@ public class Employee {
 	@UpdateTimestamp	
 	@Column(name="employee_update_at")
 	private Date updateAt;
+
 
 }

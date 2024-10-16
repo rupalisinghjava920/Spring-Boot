@@ -4,25 +4,22 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.springbootrestapi.model.Employee;
 
 
 @Repository
-public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long>{
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Integer>{
 
 	
 	Employee save(Employee employee);
 	
-	Optional<Employee> findById(Long id);
+	Optional<Employee> findById(int id);
 
-	void deleteById(Long id);
+	void deleteById(int id);
 
 	List<Employee> findByName(String name); 
 	
@@ -37,5 +34,6 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
 
 	boolean existsByEmail(String email);
 
-	
+
+	List<Employee> findAll();
 }

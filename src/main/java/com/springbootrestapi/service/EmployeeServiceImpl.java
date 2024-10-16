@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 
 	@Override
-	public Employee getSingleEmployee(Long id) {
+	public Employee getSingleEmployee(int id) {
 		Optional<Employee> employee = employeeRepository.findById(id);
 		if(employee.isPresent()) {
 		return employee.get();
@@ -40,12 +40,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public void deleteEmployee(Long id) {
+	public void deleteEmployee(int id) {
 		this.employeeRepository.deleteById(id);
+
 	}
 
 	@Override
-	public Employee updateEmployee(Employee employee) {
+	public Employee updateEmployee(Employee employee,int employeeId) {
 		return employeeRepository.save(employee);
 	}
 

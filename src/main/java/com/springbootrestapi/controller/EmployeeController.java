@@ -32,37 +32,38 @@ public class EmployeeController {
 	public ResponseEntity<List<Employee>> getEmployees(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
 		return new ResponseEntity<List<Employee>>(employeeService.getEmployees(pageNumber,pageSize),HttpStatus.OK);
 	}
-	
+
 //	@PostMapping("/save")
 //	public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee) {
 //		return new ResponseEntity<Employee>(employeeService.saveEmployee(employee),HttpStatus.OK);
 //	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<String> saveEmployee(@Valid @RequestBody Employee employee) {
+	public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee) {
 		if(employeeRepository.existsByEmail(employee.getEmail())) {
-			return ResponseEntity.badRequest().body("Email address already in use");
+			return ResponseEntity.badRequest().body(null);
 		}
 		employeeRepository.save(employee);
-		return ResponseEntity.ok("Employee save successfully");
+		return ResponseEntity.status(HttpStatus.CREATED).body(employee);
 	}
 
 
 	@GetMapping("/employees/{id}")
-	public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
+	public ResponseEntity<Employee> getEmployee(@PathVariable int id) {
 		return new ResponseEntity<>(this.employeeService.getSingleEmployee(id),HttpStatus.OK);
 	}
 	
 	@Transactional
-	@DeleteMapping("/employees")
-	public ResponseEntity<HttpStatus> deleteEmployee(@RequestParam Long id) {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		
+	@DeleteMapping("/employee/{id}/delete")
+	public ResponseEntity<Employee> deleteEmployee(@PathVariable int id) {
+		     employeeService.deleteEmployee(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
-	@PutMapping("/employees/{id}")
-	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee,@PathVariable Long id) {
-		return new ResponseEntity<Employee>(this.employeeService.saveEmployee(employee),HttpStatus.OK);
+
+	@PutMapping("/employee/{id}/update")
+	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("id") int employeeId) {
+		Employee updatedEmployee = employeeService.updateEmployee(employee, employeeId);
+		return ResponseEntity.ok(updatedEmployee);  // Make sure the Employee object is returned here
 	}
 	
 	@GetMapping("/employees/filterByName")
